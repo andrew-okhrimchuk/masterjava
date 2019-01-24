@@ -33,8 +33,7 @@
         </plugins>
     </build>
 
-    <dependencies>
-    </dependencies>
+
 
     <profiles>
     </profiles>
