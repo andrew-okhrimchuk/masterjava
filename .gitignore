@@ -3,3 +3,16 @@ out
 target
 *.iml
 log
+/src/2/
+src/1_1_MailService.patch
+src/2/
+/src/2/2_09_XPath.patch
+/src/2/2_01_HW1_singleThreadMultiplyOpt.patch
+/src/2/2_08_StAX.patch
+/src/2/2_07_JAXB.patch
+/src/2/2_03_HW1_concurrentMultiply2.patch
+/src/2/2_04_JMH_Benchmark.patch
+/src/2/2_02_HW1_concurrentMultiply.patch
+/src/2/2_05_JMH_main_jar.patch
+/src/2/2_06_xml_scheme.patch
+/src/2/2_10_Xslt.patch
