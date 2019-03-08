@@ -28,10 +28,10 @@ public class MainXml {
        }
 
     public static void main(String[] args) throws JAXBException, IOException, SAXException {
-       /* MainXml xx = new MainXml("topjava");
+        MainXml xx = new MainXml("topjava");
         MainXml xx2 = new MainXml("masterjava");
         xx.print();
-        xx2.print();*/
+        xx2.print();
     }
 
     public void print () throws IOException, JAXBException, SAXException {
