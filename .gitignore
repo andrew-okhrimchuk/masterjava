@@ -16,3 +16,9 @@ src/2/
 /src/2/2_05_JMH_main_jar.patch
 /src/2/2_06_xml_scheme.patch
 /src/2/2_10_Xslt.patch
+/src/3/3_2_HW2_JAXB_HTML.patch
+/src/3/3_1_HW2_schema.patch
+/src/3/3_6_multimodule.patch
+/src/3/3_5_HW2_xslt.patch
+/src/3/3_3_HW2_StAX.patch
+/src/3/3_4_StAX_refactoring.patch
