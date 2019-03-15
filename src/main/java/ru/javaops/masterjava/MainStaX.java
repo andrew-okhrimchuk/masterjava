@@ -31,7 +31,7 @@ public class MainStaX {
                 if (event == XMLEvent.START_ELEMENT) {
                     if (element.equals(reader.getLocalName())) {
                         System.out.println(reader.getAttributeValue(2));
-                    }
+                     }
                 }
             }
         }
