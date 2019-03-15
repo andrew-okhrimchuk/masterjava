@@ -39,34 +39,21 @@ public class MainXml {
         String strPayload = JAXB_PARSER.marshal(payload);
         JAXB_PARSER.validate(strPayload);
 
-         List<List<Group>> xx = payload.getProjects().getProject()
+        Project xx = payload.getProjects().getProject()
                 .stream()
                 .filter(project -> project.getName().equalsIgnoreCase(nameProject))
-                .map(project -> project.getGroup())
-                .collect(toList());
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid project name '" + "payload.xml" + '\''));
 
-         List<String> groupName = xx.get(0).stream()
-                 .map(group -> group.getName())
-                 .collect(toList());
-
-       // final Set<Group> groups = new HashSet<>(payload.getProjects().getProject().getGroup());  // identity compare
+        final Set<Project.Group> groupName = new HashSet<>(xx.getGroup());
 
         Set<User> xx2 = payload.getUsers().getUser().stream()
                 .filter(u -> !Collections.disjoint(groupName, u.getGroupRefs())) //Более формально, две коллекции не пересекаются, если у них нет общих элементов.
                 .collect(
                         Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getValue).thenComparing(User::getEmail))));
-
-
-       /* System.out.println(xx.get(0).toString());*/
-        System.out.println("groupName = " + groupName);
-        System.out.println("xx2.size() = " + xx2.size());
         for (User us: xx2
              ) {
             System.out.println(us.getValue());
         }
-
-        System.out.println(Collections.disjoint(payload.getUsers().getUser().get(0).getGroupRefs(), groupName));
-
-
     }
 }
