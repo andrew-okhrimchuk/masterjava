@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import static com.google.common.base.Strings.nullToEmpty;
 import static j2html.TagCreator.*;
 
+
 public class MainXml {
 
     private static final Comparator<User> USER_COMPARATOR = Comparator.comparing(User::getValue).thenComparing(User::getEmail);
