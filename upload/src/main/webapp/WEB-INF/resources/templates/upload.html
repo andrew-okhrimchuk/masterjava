@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+    <title>File Upload Sample</title>
+</head>
+<body>
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <p>
+        <label>Select a file: </label>
+        <input type="file" name="file"/>
+    </p>
+    <input type="submit" value="Upload" />
+</form>
+</body>
+
+</html>
