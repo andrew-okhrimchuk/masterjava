@@ -30,6 +30,7 @@ public class StaxStreamProcessorTest {
             String city;
             while ((city = processor.getElementValue("City")) != null) {
                 System.out.println(city);
+
             }
         }
     }
