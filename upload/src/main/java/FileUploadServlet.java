@@ -16,7 +16,10 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,45 +39,42 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         Part file = req.getPart("file");
-        processByStax(file);
-        /*try (StaxStreamProcessor processor = new StaxStreamProcessor(file.getInputStream())) {
-            XMLStreamReader reader = processor.getReader();
 
-            while (reader.hasNext()) {
-                if (reader.getEventType() == XMLEvent.START_ELEMENT) {
-                    if ("User".equals(reader.getLocalName())) {
-
-                        System.out.println(reader.getElementText());
-                       // System.out.println(reader.getAttributeCount());
-                        // System.out.println(reader.next());
-
-
-                    }
-                }
+        try (InputStream is = file.getInputStream()) {
+            try {
+                processByStax(is);
+            } catch (XMLStreamException e) {
+                e.printStackTrace();
             }
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        }*/
-
-
+        }
     }
 
 
-    private static void processByStax(Part payload)  {
+    private static void processByStax(InputStream is) throws XMLStreamException {
 
-        try (InputStream is = payload.getInputStream()) {
+
+
             StaxStreamProcessor processor = new StaxStreamProcessor(is);
 
             while (processor.startElement("User", "Users")) {
-                System.out.println (processor.getText());
-                System.out.print (" " + processor.getAttribute("flag"));
-                System.out.print (" " + processor.getAttribute("email"));
+                String name;
+                String flag;
+                String email;
+
+                flag = processor.getAttribute("flag");
+                email = processor.getAttribute("email");
+                name = processor.getText();
+                System.out.println(name + " " + flag + " " +  email);
+
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        }
+
+
     }
+    public static void main(String[] args) throws Exception {
+        URL payloadUrl = Resources.getResource("payload.xml");
+        InputStream xxxx = payloadUrl.openStream();
+        processByStax(xxxx);
+    }
+
 
 }

@@ -44,9 +44,9 @@ public class MainXml {
         System.out.println();
         String html = toHtml(users, projectName);
         System.out.println(html);
-        try (Writer writer = Files.newBufferedWriter(Paths.get("out/users.html"))) {
+      /*  try (Writer writer = Files.newBufferedWriter(Paths.get("out/users.html"))) {
             writer.write(html);
-        }
+        }*/
 
         System.out.println();
         users = processByStax(projectName, payloadUrl);
