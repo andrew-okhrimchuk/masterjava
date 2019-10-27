@@ -51,19 +51,14 @@ public class FileUploadServlet extends HttpServlet {
 
 
     private static void processByStax(InputStream is) throws XMLStreamException {
-
-
-
             StaxStreamProcessor processor = new StaxStreamProcessor(is);
-
             while (processor.startElement("User", "Users")) {
-                String name;
-                String flag;
-                String email;
+                String name, flag, email;
 
                 flag = processor.getAttribute("flag");
                 email = processor.getAttribute("email");
                 name = processor.getText();
+
                 System.out.println(name + " " + flag + " " +  email);
 
             }
@@ -72,8 +67,8 @@ public class FileUploadServlet extends HttpServlet {
     }
     public static void main(String[] args) throws Exception {
         URL payloadUrl = Resources.getResource("payload.xml");
-        InputStream xxxx = payloadUrl.openStream();
-        processByStax(xxxx);
+        InputStream is = payloadUrl.openStream();
+        processByStax(is);
     }
 
 

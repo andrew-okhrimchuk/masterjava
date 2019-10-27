@@ -84,7 +84,7 @@ public class MainXml {
 
         try (InputStream is = payloadUrl.openStream()) {
             StaxStreamProcessor processor = new StaxStreamProcessor(is);
-            final Set<String> groupNames = new HashSet<>();
+            final Set<String> groupNames = new HashSet<>();//получили список групп в которых учавствуют Юсеры по данному проекту
 
             // Projects loop
             projects:
@@ -101,7 +101,7 @@ public class MainXml {
             }
 
             // Users loop
-            Set<User> users = new TreeSet<>(USER_COMPARATOR);
+            Set<User> users = new TreeSet<>(USER_COMPARATOR);// перебираем группы в юсерах и вытягиваем юсеров с них
 
             JaxbParser parser = new JaxbParser(User.class);
             while (processor.doUntil(XMLEvent.START_ELEMENT, "User")) {
