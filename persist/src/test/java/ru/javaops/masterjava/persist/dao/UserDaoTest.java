@@ -10,6 +10,7 @@ import ru.javaops.masterjava.persist.model.User;
 import java.util.List;
 
 import static ru.javaops.masterjava.persist.UserTestData.FIST5_USERS;
+import static ru.javaops.masterjava.persist.UserTestData.FIST5_USERS2;
 
 public class UserDaoTest extends AbstractDaoTest<UserDao> {
 
@@ -29,6 +30,20 @@ public class UserDaoTest extends AbstractDaoTest<UserDao> {
 
     @Test
     public void getWithLimit() {
+        List<User> users = dao.getWithLimit(5);
+        Assert.assertEquals(FIST5_USERS, users);
+    }
+
+    @Test
+    public void setSameUsers() {
+        dao.insertWitIdBatch(FIST5_USERS, 5);
+        List<User> users = dao.getWithLimit(5);
+        Assert.assertEquals(FIST5_USERS, users);
+    }
+
+    @Test
+    public void setSameUsersWithOutId() {
+        dao.insertGeneratedIdBatch(FIST5_USERS2, 5);
         List<User> users = dao.getWithLimit(5);
         Assert.assertEquals(FIST5_USERS, users);
     }
