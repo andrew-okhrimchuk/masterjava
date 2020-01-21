@@ -10,6 +10,7 @@ CREATE TABLE users (
   id        INTEGER PRIMARY KEY DEFAULT nextval('user_seq'),
   full_name TEXT NOT NULL,
   email     TEXT NOT NULL,
-  flag      user_flag NOT NULL,
-constraint email unique (email));
+  flag      user_flag NOT NULL);
+
+CREATE UNIQUE INDEX email_idx on users (email);
 
