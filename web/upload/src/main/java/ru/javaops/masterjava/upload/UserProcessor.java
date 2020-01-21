@@ -37,9 +37,6 @@ public class UserProcessor {
                 dao.insertGeneratedIdBatch(users, 20);
                 users = new ArrayList<>();
             }
-            if (result.size() <= 20){
-                result.add(user);
-            }
         }
         dao.insertGeneratedIdBatch(users, users.size());
         return result;

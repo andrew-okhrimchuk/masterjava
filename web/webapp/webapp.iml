@@ -6,6 +6,9 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://D:/apps/masterjava/config" />
+        </sourceRoots>
       </configuration>
     </facet>
   </component>
