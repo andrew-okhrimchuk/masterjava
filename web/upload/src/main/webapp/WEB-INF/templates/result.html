@@ -4,7 +4,10 @@
     <title>Uploaded users</title>
 </head>
 <body>
+<h2 th:if="!${messages.isEmpty()}" th:text="${messages}">Message</h2>
+
 <h4><a href="">Upload XML</a></h4>
+
 <h3>Uploaded users</h3>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
