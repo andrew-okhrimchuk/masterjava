@@ -30,6 +30,7 @@ public class DBIProvider {
                     InitialContext ctx = new InitialContext();
                     dbi = new DBI((DataSource) ctx.lookup("java:/comp/env/jdbc/masterjava"));
                 } catch (Exception ex) {
+                    log.error("Can not Init jDBI with  JNDI");
                     throw new IllegalStateException("PostgreSQL initialization failed", ex);
                 }
             }
