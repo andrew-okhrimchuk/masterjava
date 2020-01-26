@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Parent Web</name>
-
     <build>
         <plugins>
             <plugin>
@@ -27,49 +26,52 @@
                 </configuration>
             </plugin>
 
+            <!--  http://stackoverflow.com/questions/4305935/is-it-possible-to-supply-tomcat6s-context-xml-file-via-the-maven-cargo-plugin#4417945 -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.6.5</version>
                 <configuration>
-                <container>
-                <containerId>tomcat8x</containerId>
-                <systemProperties>
-                    <file.encoding>UTF-8</file.encoding>
-                </systemProperties>
-                <dependencies>
-                      <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                     </dependency>
-                    </dependencies>
-                </container>
-                <configuration>
-                   <configfiles>
-                     <configfile>
+                    <container>
+                        <containerId>tomcat8x</containerId>
+                        <zipUrlInstaller>
+                            <url>https://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.23/tomcat-8.5.23.zip</url>
+                        </zipUrlInstaller>
 <!--
-                         <file>${masterjava.config}/context.xml</file>
+                        <home>/Users/horsti/files/tomcats/apache-tomcat-8.5.4</home>
 -->
-                        <file>config_templates/context.xml</file>
-                        <todir>conf/Catalina/localhost/</todir>
-                        <tofile>context.xml.default</tofile>
-                      </configfile>
-                     </configfiles>
-                </configuration>
-                <deployables>
-                    <deployable>
-                        <groupId>${project.groupId}</groupId>
-                      <artifactId>${project.artifactId}</artifactId>
-                       <type>war</type>
-                     <properties>
-                        <context>${project.build.finalName}</context>
-                      </properties>
-                      </deployable>
+                        <systemProperties>
+                            <file.encoding>UTF-8</file.encoding>
+                        </systemProperties>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                            </dependency>
+                        </dependencies>
+                    </container>
+                    <configuration>
+                        <configfiles>
+                            <configfile>
+                                <file>${masterjava.config}/context.xml</file>
+                                <todir>conf/Catalina/localhost/</todir>
+                                <tofile>context.xml.default</tofile>
+                            </configfile>
+                        </configfiles>
+                    </configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>${project.build.finalName}</context>
+                            </properties>
+                        </deployable>
                     </deployables>
                 </configuration>
             </plugin>
         </plugins>
-
         <resources>
             <resource>
                 <directory>${masterjava.config}</directory>
