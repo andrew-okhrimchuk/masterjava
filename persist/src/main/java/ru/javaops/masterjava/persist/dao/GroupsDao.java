@@ -21,7 +21,8 @@ public abstract class GroupsDao implements AbstractDao {
         return groups;
     }
 
-
+    @SqlQuery("SELECT nextval('groups_seq')")
+    abstract int getNextVal();
 
 
     @SqlUpdate("INSERT INTO groups (name) VALUES (:name) ")
@@ -35,7 +36,7 @@ public abstract class GroupsDao implements AbstractDao {
     public abstract List<Groups> getWithLimit(@Bind int limit);
 
     //   http://stackoverflow.com/questions/13223820/postgresql-delete-all-content
-    @SqlUpdate("TRUNCATE city")
+    @SqlUpdate("TRUNCATE groups CASCADE")
     @Override
     public abstract void clean();
 
