@@ -17,15 +17,12 @@ public class ProjectTestData {
     public static List<Project> FIST5_projects;
 
     public static void init() {
-        GroupsTestData.init();
-        GroupsTestData.setUp();
-
-        project1 = new Project("Project1", "description about Project1", groups1.getId() );
-        project2 = new Project("Project2", "description about Project2", groups2.getId());
-        project3 = new Project("Project3", "description about Project3", groups3.getId());
-        project4 = new Project("Project4", "description about Project4", groups1.getId());
-        project5 = new Project("Project5", "description about Project5", groups2.getId());
-        project6 = new Project("Project6", "description about Project6", groups3.getId());
+        project1 = new Project("Project1", "description about Project1");
+        project2 = new Project("Project2", "description about Project2");
+        project3 = new Project("Project3", "description about Project3");
+        project4 = new Project("Project4", "description about Project4");
+        project5 = new Project("Project5", "description about Project5");
+        project6 = new Project("Project6", "description about Project6");
         FIST5_projects = ImmutableList.of(project1, project2,project3,project4,project5);
     }
 

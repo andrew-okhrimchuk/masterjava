@@ -25,11 +25,11 @@ public abstract class GroupsDao implements AbstractDao {
     abstract int getNextVal();
 
 
-    @SqlUpdate("INSERT INTO groups (name) VALUES (:name) ")
+    @SqlUpdate("INSERT INTO groups (name, flag, project_id) VALUES (:name, CAST(:flag AS groups_flag), :project_id) ")
     @GetGeneratedKeys
     abstract int insertGeneratedId(@BindBean Groups groups);
 
-    @SqlUpdate("INSERT INTO groups (id, name) VALUES (:id, :name) ")
+    @SqlUpdate("INSERT INTO groups (id, name, flag, project_id) VALUES (:id, :name, CAST(:flag AS groups_flag), :project_id) ")
     abstract void insertWitId(@BindBean Groups groups);
 
     @SqlQuery("SELECT * FROM groups ORDER BY name LIMIT :it")
@@ -41,7 +41,7 @@ public abstract class GroupsDao implements AbstractDao {
     public abstract void clean();
 
     //    https://habrahabr.ru/post/264281/
-    @SqlBatch("INSERT INTO groups (id, name) VALUES (:id, :name)" +
+    @SqlBatch("INSERT INTO groups (id, name, flag, project_id) VALUES (:id, :name, CAST(:flag AS groups_flag), :project_id)" +
             "ON CONFLICT DO NOTHING")
 //            "ON CONFLICT (email) DO UPDATE SET full_name=:fullName, flag=CAST(:flag AS USER_FLAG)")
     public abstract int[] insertBatch(@BindBean List<Groups> groups, @BatchChunkSize int chunkSize);

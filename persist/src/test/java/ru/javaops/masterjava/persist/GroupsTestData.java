@@ -6,22 +6,29 @@ import ru.javaops.masterjava.persist.model.Groups;
 
 import java.util.List;
 
+import static ru.javaops.masterjava.persist.model.GroupFlag.*;
+import static ru.javaops.masterjava.persist.ProjectTestData.*;
+
+
 public class GroupsTestData {
-    public static Groups REGISTERING;
-    public static Groups CURRENT;
-    public static Groups FINISHED;
+    public static Groups topjava1;
+    public static Groups topjava2;
+    public static Groups topjava3;
     public static Groups groups1;
     public static Groups groups2;
     public static Groups groups3;
     public static List<Groups> FIST5_groups;
 
     public static void init() {
-        REGISTERING = new Groups("REGISTERING");
-        CURRENT = new Groups("CURRENT");
-        FINISHED = new Groups("FINISHED");
-        groups1 = new Groups("Groups1");
-        groups2 = new Groups("Groups2");
-        groups3 = new Groups("Groups3");
+        ProjectTestData.init();
+        ProjectTestData.setUp();
+
+        topjava1 = new Groups("topjava1", registering, project1.getId());
+        topjava2 = new Groups("topjava2", current, project2.getId());
+        topjava3 = new Groups("topjava3", finished, project3.getId());
+        groups1 = new Groups("Groups1",registering, project4.getId());
+        groups2 = new Groups("Groups2",current, project5.getId());
+        groups3 = new Groups("Groups3",finished, project6.getId());
         FIST5_groups = ImmutableList.of(groups1, groups2);
     }
 

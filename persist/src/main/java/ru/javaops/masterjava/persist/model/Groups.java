@@ -9,9 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 public class Groups extends BaseEntity {
     private @NonNull String name;
+    private @NonNull GroupFlag flag;
+    @Column("project_id")
+    private @NonNull Integer project_id;
 
-    public Groups(Integer id, String name) {
-        this(name);
+    public Groups(Integer id, String name, GroupFlag flag, Integer project_id) {
+        this(name,flag, project_id);
         this.id=id;
     }
 }
