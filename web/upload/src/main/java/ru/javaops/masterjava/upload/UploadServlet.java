@@ -3,6 +3,7 @@ package ru.javaops.masterjava.upload;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.context.WebContext;
+import ru.javaops.masterjava.persist.model.City;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,6 +25,7 @@ public class UploadServlet extends HttpServlet {
     private static final int CHUNK_SIZE = 2000;
 
     private final UserProcessor userProcessor = new UserProcessor();
+    private final CityProcessor cityProcessor = new CityProcessor();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,12 +43,16 @@ public class UploadServlet extends HttpServlet {
                 message = "Chunk Size must be > 1";
             } else {
                 Part filePart = req.getPart("fileToUpload");
-                try (InputStream is = filePart.getInputStream()) {
-                    List<UserProcessor.FailedEmails> failed = userProcessor.process(is, chunkSize);
-                    log.info("Failed users: " + failed);
+                try (InputStream is = filePart.getInputStream();
+                     InputStream is2 = filePart.getInputStream()
+                ) {
+                   List<CityProcessor.FailedCity> failedCity = cityProcessor.process(is2, chunkSize);
+                    List<UserProcessor.FailedEmails> failedUser = userProcessor.process(is, chunkSize);
+                    log.info("Failed users: " + failedUser);
+                    log.info("Failed citys: " + failedCity);
                     final WebContext webContext =
                             new WebContext(req, resp, req.getServletContext(), req.getLocale(),
-                                    ImmutableMap.of("users", failed));
+                                    ImmutableMap.of("users", failedUser));
                     engine.process("result", webContext, resp.getWriter());
                     return;
                 }

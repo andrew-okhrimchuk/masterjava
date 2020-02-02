@@ -7,6 +7,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.BatchChunkSize;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import ru.javaops.masterjava.persist.DBIProvider;
 import ru.javaops.masterjava.persist.model.City;
+import ru.javaops.masterjava.persist.model.User;
 
 import java.util.List;
 
@@ -43,9 +44,16 @@ public abstract class CityDao implements AbstractDao {
     public abstract void clean();
 
     //    https://habrahabr.ru/post/264281/
-    @SqlBatch("INSERT INTO city (id, name) VALUES (:id, :name)" +
+    @SqlBatch("INSERT INTO city (name) VALUES (:name)" +
             "ON CONFLICT DO NOTHING")
 //            "ON CONFLICT (email) DO UPDATE SET full_name=:fullName, flag=CAST(:flag AS USER_FLAG)")
     public abstract int[] insertBatch(@BindBean List<City> city, @BatchChunkSize int chunkSize);
 
+    public List<String> insertAndGetConflictEmails(List<City> city) {
+        int[] result = insertBatch(city, city.size());
+        return IntStreamEx.range(0, city.size())
+                .filter(i -> result[i] == 0)
+                .mapToObj(index -> city.get(index).getName())
+                .toList();
+    }
 }
